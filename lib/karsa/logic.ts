@@ -172,42 +172,82 @@ function computeConfidence(lower: string, amount: number): number {
   return Math.min(0.98, Number(score.toFixed(2)))
 }
 
+interface AmountCandidate {
+  value: number
+  hasUnit: boolean
+}
+
+/**
+ * Words that appear right after a number but signal a quantity/count, not
+ * money (e.g. "3 porsi", "5 gelas"). Amounts tied to these are de-prioritized.
+ */
+const COUNT_WORDS = [
+  'porsi',
+  'gelas',
+  'biji',
+  'buah',
+  'bungkus',
+  'pcs',
+  'potong',
+  'orang',
+  'liter',
+  'kg',
+  'kilo',
+]
+
 /**
  * Extract a rupiah amount from a text segment.
+ *
+ * A segment can contain several numbers (e.g. "nasi goreng 3 porsi 45rb").
+ * We scan every number, score each candidate, and choose the one most likely
+ * to be money: explicit units (rb/ribu/jt/juta/k) or "Rp" win, bare counts
+ * like "3 porsi" lose.
  */
 export function extractAmount(text: string): number {
-  const lower = text.toLowerCase().replace(/rp\.?/g, ' ')
+  const lower = text.toLowerCase()
+  const regex = /(rp\.?\s*)?(\d[\d.,]*)\s*(jt|juta|rb|ribu|k)?/gi
+  const candidates: AmountCandidate[] = []
 
-  // Match a number followed by an optional unit (rb, ribu, jt, juta, k).
-  const match = lower.match(/(\d[\d.,]*)\s*(jt|juta|rb|ribu|k)?/)
-  if (!match) return 0
+  let match: RegExpExecArray | null
+  while ((match = regex.exec(lower)) !== null) {
+    const hasRpPrefix = Boolean(match[1])
+    let numStr = match[2]
+    const unit = match[3]
 
-  let numStr = match[1]
-  const unit = match[2]
+    if (unit) {
+      numStr = numStr.replace(/\./g, '').replace(',', '.')
+    } else {
+      numStr = numStr.replace(/\./g, '').replace(/,/g, '')
+    }
 
-  // Normalize thousands/decimal separators.
-  if (unit) {
-    // e.g. "1,5jt" -> 1.5 ; "45rb" -> 45
-    numStr = numStr.replace(/\./g, '').replace(',', '.')
-  } else {
-    // e.g. "300.000" -> 300000
-    numStr = numStr.replace(/\./g, '').replace(/,/g, '')
+    let value = parseFloat(numStr)
+    if (Number.isNaN(value)) continue
+
+    switch (unit) {
+      case 'jt':
+      case 'juta':
+        value *= 1_000_000
+        break
+      case 'rb':
+      case 'ribu':
+      case 'k':
+        value *= 1_000
+        break
+    }
+    value = Math.round(value)
+    if (value <= 0) continue
+
+    // Is this number immediately followed by a counting word?
+    const after = lower.slice(regex.lastIndex).trimStart()
+    const isCount = COUNT_WORDS.some((w) => after.startsWith(w))
+
+    candidates.push({ value, hasUnit: Boolean(unit) || hasRpPrefix || (!isCount && value >= 1000) })
   }
 
-  let value = parseFloat(numStr)
-  if (Number.isNaN(value)) return 0
+  if (candidates.length === 0) return 0
 
-  switch (unit) {
-    case 'jt':
-    case 'juta':
-      value *= 1_000_000
-      break
-    case 'rb':
-    case 'ribu':
-    case 'k':
-      value *= 1_000
-      break
-  }
-
-  return Math.round(value)
+  // Prefer candidates that clearly represent money; among those, the largest.
+  const monetary = candidates.filter((c) => c.hasUnit)
+  const pool = monetary.length > 0 ? monetary : candidates
+  return pool.reduce((max, c) => (c.value > max ? c.value : max), 0)
 }
