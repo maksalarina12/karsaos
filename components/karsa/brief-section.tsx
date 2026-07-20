@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   Check,
@@ -130,7 +131,13 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
     return (
       <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900 border-dashed">
         <CardContent className="flex flex-col items-center gap-2 py-12 text-center">
-          <FileText className="size-8 text-slate-400" />
+          <Image
+            src="/karsaos.png"
+            alt="KarsaOS Logo"
+            width={40}
+            height={40}
+            className="object-contain opacity-70 mb-1"
+          />
           <p className="text-slate-900 dark:text-slate-100 text-sm font-semibold">Belum Ada Executive Brief</p>
           <p className="max-w-sm text-xs text-slate-500 leading-relaxed font-mono">
             Muat contoh data warung atau catat beberapa transaksi untuk mengaktifkan AI Intelligence Agent.
@@ -305,7 +312,14 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
         {openBrief ? (
           <>
             <DialogHeader>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
+                <Image
+                  src="/karsaos.png"
+                  alt="KarsaOS Brand"
+                  width={24}
+                  height={24}
+                  className="object-contain"
+                />
                 <span className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-mono font-semibold ${TYPE_META[openBrief.type].badgeBg} ${TYPE_META[openBrief.type].badgeText}`}>
                   {TYPE_META[openBrief.type].icon}
                   <span>{TYPE_META[openBrief.type].code}</span>

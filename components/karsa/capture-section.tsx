@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   Check,
@@ -264,7 +265,13 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
     <Card className="border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900 shadow-xs">
       <CardHeader className="pb-3 border-b border-slate-100 dark:border-slate-800/60">
         <CardTitle className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-slate-100">
-          <Cpu className="size-4 text-indigo-500" />
+          <Image
+            src="/karsaos.png"
+            alt="KarsaOS Brand"
+            width={20}
+            height={20}
+            className="object-contain"
+          />
           <span>AI Voice & Text Capture</span>
         </CardTitle>
         <p className="text-xs text-slate-500">

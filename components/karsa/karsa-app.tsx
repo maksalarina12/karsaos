@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BarChart3, Lightbulb, MessageCircle, Mic } from 'lucide-react'
 
@@ -157,8 +158,18 @@ function KarsaAppInner() {
           </AnimatePresence>
         </Tabs>
 
-        <footer className="border-t border-slate-200/80 dark:border-slate-800/80 pt-5 text-center text-[11px] font-mono text-slate-400">
-          KarsaOS Executive AI Copilot — Enterprise Financial Intelligence. Local-first privacy architecture.
+        <footer className="border-t border-slate-200/80 dark:border-slate-800/80 pt-6 pb-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-slate-400">
+          <div className="flex items-center gap-2">
+            <Image
+              src="/karsaos.png"
+              alt="KarsaOS Brand"
+              width={20}
+              height={20}
+              className="object-contain opacity-80 hover:opacity-100 transition-opacity"
+            />
+            <span className="font-semibold text-slate-600 dark:text-slate-300">KarsaOS Executive AI Copilot</span>
+          </div>
+          <span>Enterprise Financial Intelligence. Local-first privacy architecture.</span>
         </footer>
       </main>
     </div>

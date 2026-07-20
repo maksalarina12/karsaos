@@ -1,8 +1,9 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Cpu, Lightbulb, SendHorizontal, Sparkles, Terminal } from 'lucide-react'
+import { Lightbulb, SendHorizontal, Terminal } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -60,9 +61,13 @@ export function AskKarsa({ state }: AskKarsaProps) {
     <Card className="flex h-[540px] max-h-[85vh] flex-col border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-900 shadow-xs">
       <CardHeader className="border-b border-slate-100 dark:border-slate-800/60 pb-3">
         <CardTitle className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-slate-100">
-          <div className="flex size-7 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm shadow-indigo-500/30">
-            <Cpu className="size-4" />
-          </div>
+          <Image
+            src="/karsaos.png"
+            alt="Karsa AI"
+            width={28}
+            height={28}
+            className="rounded-full object-contain border border-zinc-200/20 shadow-xs"
+          />
           <span>Ask Karsa — AI Copilot</span>
           <span className="ml-auto rounded-full bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-600 border border-emerald-200/60">
             ONLINE
@@ -86,9 +91,13 @@ export function AskKarsa({ state }: AskKarsaProps) {
             >
               <div className="flex items-start gap-2.5 max-w-[88%] sm:max-w-[82%]">
                 {m.role === 'assistant' && (
-                  <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-indigo-600 text-white shadow-xs mt-0.5">
-                    <Sparkles className="size-3.5" />
-                  </div>
+                  <Image
+                    src="/karsaos.png"
+                    alt="Karsa AI"
+                    width={24}
+                    height={24}
+                    className="rounded-full object-contain border border-zinc-200/20 shrink-0 mt-0.5"
+                  />
                 )}
                 <div
                   className={`rounded-xl px-4 py-3 text-xs leading-relaxed ${
@@ -120,9 +129,13 @@ export function AskKarsa({ state }: AskKarsaProps) {
                 className="flex justify-start"
               >
                 <div className="flex items-center gap-2 rounded-xl rounded-tl-xs border border-slate-200/80 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-950/80 px-3.5 py-2.5 text-xs font-mono text-slate-500">
-                  <div className="flex size-5 items-center justify-center rounded-md bg-indigo-600 text-white">
-                    <Cpu className="size-3" />
-                  </div>
+                  <Image
+                    src="/karsaos.png"
+                    alt="Karsa AI"
+                    width={20}
+                    height={20}
+                    className="rounded-full object-contain border border-zinc-200/20 shrink-0"
+                  />
                   <span>Karsa AI sedang menganalisis titik data</span>
                   <div className="flex items-center gap-1 ml-1">
                     {[0, 1, 2].map((dotIndex) => (

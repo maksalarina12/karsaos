@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { animate, AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
   ArrowDownRight,
@@ -255,11 +256,20 @@ export function FinancialDashboard({
 
         <CardContent className="pt-2">
           {filtered.length === 0 ? (
-            <p className="py-12 text-center text-xs font-mono text-slate-500">
-              {transactions.length === 0
-                ? 'Belum ada data transaksi. Gunakan tombol "Muat Contoh Data Warung" atau rekam cerita bisnis.'
-                : 'Tidak ada transaksi yang sesuai dengan filter pencarian.'}
-            </p>
+            <div className="flex flex-col items-center justify-center gap-2 py-12 text-center font-mono text-xs text-slate-500">
+              <Image
+                src="/karsaos.png"
+                alt="KarsaOS Logo"
+                width={36}
+                height={36}
+                className="object-contain opacity-50 mb-1"
+              />
+              <p>
+                {transactions.length === 0
+                  ? 'Belum ada data transaksi. Gunakan tombol "Muat Contoh Data Warung" atau rekam cerita bisnis.'
+                  : 'Tidak ada transaksi yang sesuai dengan filter pencarian.'}
+              </p>
+            </div>
           ) : (
             <>
               {/* Desktop Data-Dense Terminal Table */}

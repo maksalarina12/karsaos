@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   description:
     'KarsaOS membantu pemilik warung dan UMKM Indonesia mencatat transaksi lewat suara, memahami kondisi keuangan, dan mengambil keputusan bisnis yang lebih baik setiap hari.',
   generator: 'v0.app',
+  icons: {
+    icon: '/karsaos.png',
+    shortcut: '/karsaos.png',
+    apple: '/karsaos.png',
+  },
 }
 
 export const viewport: Viewport = {

@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Cpu, Sparkles, Zap } from 'lucide-react'
+import { Zap } from 'lucide-react'
 
+import { KarsaLogo } from '@/components/KarsaLogo'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { HEALTH_META } from '@/lib/karsa/health-meta'
@@ -51,13 +52,7 @@ export function TopNav({ health, onSeed }: TopNavProps) {
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         {/* Brand & Logo */}
         <div className="flex items-center gap-3">
-          <motion.div
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="flex size-9 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 ring-1 ring-indigo-500/20"
-          >
-            <Cpu className="size-5" />
-          </motion.div>
+          <KarsaLogo width={36} height={36} priority href="/" />
           <div>
             <div className="flex items-center gap-2">
               <span className="text-base font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
