@@ -6,7 +6,7 @@ import { CheckCircle2, Info, X, TriangleAlert } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-type ToastVariant = 'success' | 'info' | 'warning'
+type ToastVariant = 'success' | 'info' | 'warning' | 'destructive'
 
 interface ToastItem {
   id: string
@@ -31,6 +31,7 @@ const ICONS: Record<ToastVariant, React.ReactNode> = {
   success: <CheckCircle2 className="size-5 text-success" />,
   info: <Info className="size-5 text-primary" />,
   warning: <TriangleAlert className="size-5 text-warning" />,
+  destructive: <TriangleAlert className="size-5 text-destructive" />,
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {

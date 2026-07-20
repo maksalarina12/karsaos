@@ -5,11 +5,9 @@ import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   Check,
-  Cpu,
   Loader2,
   Mic,
   MicOff,
-  Pencil,
   Sparkles,
   Terminal,
   Trash2,
@@ -28,17 +26,43 @@ interface CaptureSectionProps {
   onCommit: (transactions: Transaction[]) => void
 }
 
+interface SpeechRecognitionEvent {
+  results: {
+    length: number
+    [index: number]: {
+      0: {
+        transcript: string
+      }
+    }
+  }
+}
+
+interface SpeechRecognitionErrorEvent {
+  error: string
+}
+
 interface SpeechRecognitionLike {
   lang: string
   continuous: boolean
   interimResults: boolean
   onstart: (() => void) | null
-  onresult: ((event: any) => void) | null
-  onerror: ((event: any) => void) | null
+  onresult: ((event: SpeechRecognitionEvent) => void) | null
+  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null
   onend: (() => void) | null
   start: () => void
   stop: () => void
   abort: () => void
+}
+
+interface SpeechRecognitionConstructor {
+  new (): SpeechRecognitionLike
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition?: SpeechRecognitionConstructor
+    webkitSpeechRecognition?: SpeechRecognitionConstructor
+  }
 }
 
 const UNDO_SECONDS = 5
@@ -59,8 +83,7 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
   // Check browser Web Speech API availability on mount
   React.useEffect(() => {
     if (typeof window === 'undefined') return
-    const Ctor =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition
     if (!Ctor) {
       setSupported(false)
     }
@@ -82,8 +105,7 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
   const toggleListening = () => {
     if (typeof window === 'undefined') return
 
-    const Ctor =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition
 
     if (!Ctor) {
       setSupported(false)
@@ -119,7 +141,7 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
         setListening(true)
       }
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechRecognitionEvent) => {
         let transcript = ''
         for (let i = 0; i < event.results.length; i++) {
           transcript += event.results[i][0].transcript
@@ -133,7 +155,7 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
         setText(newText)
       }
 
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
         setListening(false)
         const error = event?.error
 
@@ -176,12 +198,12 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
 
       recognitionRef.current = recognition
       recognition.start()
-    } catch (err: any) {
+    } catch (err: unknown) {
       setListening(false)
       toast({
         variant: 'destructive',
         title: 'Gagal Memulai Rekaman',
-        description: err?.message || 'Pastikan izin mikrofon telah diberikan.',
+        description: (err as Error)?.message || 'Pastikan izin mikrofon telah diberikan.',
       })
     }
   }

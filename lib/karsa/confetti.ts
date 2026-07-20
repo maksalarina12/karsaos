@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti'
 const BRAND_COLORS = ['#FF6B35', '#7A9B76', '#E8A33D', '#C1502E', '#FFF8F0']
 
 export function celebrate() {
+  if (typeof window === 'undefined') return
   const end = Date.now() + 700
 
   const frame = () => {

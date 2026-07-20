@@ -40,8 +40,7 @@ export class LocalStorageRepository implements KarsaRepository {
         businessBriefs: parsed.businessBriefs ?? [],
         businessHealth: parsed.businessHealth ?? 'Sehat',
       }
-    } catch (error) {
-      console.log('[v0] Failed to load KarsaOS state:', (error as Error).message)
+    } catch {
       return EMPTY_STATE
     }
   }
@@ -50,8 +49,8 @@ export class LocalStorageRepository implements KarsaRepository {
     if (typeof window === 'undefined') return
     try {
       window.localStorage.setItem(this.key, JSON.stringify(state))
-    } catch (error) {
-      console.log('[v0] Failed to save KarsaOS state:', (error as Error).message)
+    } catch {
+      // Storage unavailable or quota exceeded
     }
   }
 

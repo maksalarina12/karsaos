@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Zap } from 'lucide-react'
 
 import { KarsaLogo } from '@/components/KarsaLogo'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { HEALTH_META } from '@/lib/karsa/health-meta'
 import type { HealthStatus } from '@/lib/karsa/types'
@@ -67,7 +68,7 @@ export function TopNav({ health, onSeed }: TopNavProps) {
           </div>
         </div>
 
-        {/* Live Status Pill & Seed Data Action */}
+        {/* Live Status Pill & Seed Data Action & Theme Toggle */}
         <div className="flex flex-wrap items-center gap-2.5">
           <div
             className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium ${pill.bg} ${pill.border} ${pill.text} transition-all duration-200`}
@@ -87,6 +88,8 @@ export function TopNav({ health, onSeed }: TopNavProps) {
               <span>Muat Contoh Data Warung</span>
             </Button>
           </motion.div>
+
+          <ThemeToggle />
         </div>
       </div>
     </header>
