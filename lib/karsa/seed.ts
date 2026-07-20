@@ -64,34 +64,34 @@ export function seedBriefs(): BusinessBrief[] {
     {
       id: uid('brief'),
       type: 'opportunity',
-      title: 'Kopi jadi mesin cuan warungmu',
+      title: 'Kategori Kopi Menjadi Pendorong Utama Omzet',
       description:
-        'Kopi menyumbang omzet paling stabil dan terus naik 3 hari terakhir. Coba tambah 5 gelas stok per hari.',
+        'Penjualan kopi mencatat tren peningkatan stabil selama 3 hari terakhir. Penambahan stok harian berpotensi menaikkan margin.',
       reasoning:
-        'Analisis AI: Dari 7 hari terakhir, penjualan kopi naik dari 20 gelas menjadi 28 gelas per hari (+40%). Margin kopi juga paling sehat dibanding menu lain, jadi menambah porsi kopi punya risiko paling kecil untuk untung lebih banyak.',
-      estimated_impact: 'Potensi tambahan untung ~Rp75.000/hari',
+        'Data 7 hari terakhir menunjukkan peningkatan penjualan kopi sebesar 40% (dari 20 ke 28 gelas per hari). Tingkat margin kategori ini stabil, sehingga penambahan stok memiliki efisiensi tinggi.',
+      estimated_impact: 'Potensi peningkatan laba ~Rp75.000/hari',
       status: 'active',
     },
     {
       id: uid('brief'),
       type: 'risk',
-      title: 'Harga susu naik, untung kopi tergerus',
+      title: 'Penyesuaian Biaya Bahan Baku Susu',
       description:
-        'Biaya bahan baku susu naik. Kalau dibiarkan, margin kopi bisa terus menipis minggu depan.',
+        'Pengeluaran bahan baku susu meningkat. Diperlukan evaluasi harga jual agar margin tidak menipis.',
       reasoning:
-        'Analisis AI: Profit kopi turun 12% karena harga bahan baku susu naik dari Rp15.000 ke Rp18.000 dalam 3 hari terakhir. Pengeluaran susu naik dari Rp150.000 menjadi Rp180.000 per pembelian, sementara harga jual kopi belum kamu sesuaikan.',
-      estimated_impact: 'Risiko kehilangan untung ~Rp30.000/hari',
+        'Terjadi kenaikan harga beli susu dari Rp15.000 menjadi Rp18.000 per kaleng dalam 3 hari terakhir. Hal ini berpotensi menekan margin jika harga jual tidak disesuaikan.',
+      estimated_impact: 'Risiko penurunan margin ~Rp30.000/hari',
       status: 'active',
     },
     {
       id: uid('brief'),
       type: 'insight',
-      title: 'Jam ramai kamu ada di pagi hari',
+      title: 'Puncak Penjualan Terkonsentrasi di Pagi Hari',
       description:
-        'Sebagian besar transaksi tercatat pagi hari. Siapkan stok lebih awal biar tidak kehabisan.',
+        'Mayoritas transaksi tercatat pada jam operasional pagi. Kesiapan stok lebih awal penting untuk menjaga kontinuitas penjualan.',
       reasoning:
-        'Analisis AI: 70% transaksi tercatat sebelum jam 12 siang. Pola ini konsisten selama 7 hari. Menyiapkan bahan sejak pagi membuat kamu tidak kehilangan pembeli di jam tersibuk.',
-      estimated_impact: 'Menjaga omzet tetap stabil di jam ramai',
+        'Sebanyak 70% transaksi terjadi sebelum pukul 12.00 WIB secara konsisten. Kesiapan stok di awal hari penting untuk memaksimalkan potensi penjualan.',
+      estimated_impact: 'Memaksimalkan kapasitas penjualan saat jam ramai',
       status: 'active',
     },
   ]

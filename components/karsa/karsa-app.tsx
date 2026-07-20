@@ -27,8 +27,8 @@ function KarsaAppInner() {
     celebrate()
     toast({
       variant: 'success',
-      title: 'Contoh Data Terisi!',
-      description: '7 hari jurnal transaksi + 3 Executive Intelligence Brief siap dianalisis.',
+      title: 'Data sampel dimuat',
+      description: '7 hari jurnal transaksi + 3 rekomendasi strategi siap dievaluasi.',
     })
   }
 
@@ -37,7 +37,7 @@ function KarsaAppInner() {
       <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 font-mono">
         <div className="flex flex-col items-center gap-3 text-slate-500">
           <div className="size-8 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent" />
-          <p className="text-xs">Menginisialisasi KarsaOS AI Copilot...</p>
+          <p className="text-xs">Menginisialisasi KarsaOS...</p>
         </div>
       </div>
     )
@@ -58,15 +58,15 @@ function KarsaAppInner() {
           <TabsList className="flex w-full flex-wrap sm:w-auto">
             <TabsTrigger value="catat">
               <Mic className="size-3.5" />
-              Catat
+              Catat Transaksi
             </TabsTrigger>
             <TabsTrigger value="brief">
               <Lightbulb className="size-3.5" />
-              Business Brief
+              Rekomendasi
             </TabsTrigger>
             <TabsTrigger value="keuangan">
               <BarChart3 className="size-3.5" />
-              Keuangan
+              Laporan Keuangan
             </TabsTrigger>
             <TabsTrigger value="tanya">
               <MessageCircle className="size-3.5" />
@@ -110,10 +110,10 @@ function KarsaAppInner() {
                 >
                   <div>
                     <h2 className="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100 font-mono">
-                      Executive Intelligence Briefing
+                      Rekomendasi Strategi & Operasional
                     </h2>
                     <p className="text-xs text-slate-500 leading-relaxed font-mono">
-                      Tiga rekomendasi strategis real-time: Peluang Growth, Mitigasi Risiko, dan Insight Operasional.
+                      Tiga area prioritas: Peluang Pertumbuhan, Mitigasi Risiko, dan Insight Operasional.
                     </p>
                   </div>
                   <BriefSection
@@ -167,9 +167,9 @@ function KarsaAppInner() {
               height={20}
               className="object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
-            <span className="font-semibold text-slate-600 dark:text-slate-300">KarsaOS Executive AI Copilot</span>
+            <span className="font-semibold text-slate-600 dark:text-slate-300">KarsaOS</span>
           </div>
-          <span>Enterprise Financial Intelligence. Local-first privacy architecture.</span>
+          <span>Sistem Informasi & Analisis Keuangan Usaha. Perlindungan privasi data lokal.</span>
         </footer>
       </main>
     </div>
@@ -189,7 +189,7 @@ function BriefSectionPreview({
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-bold tracking-tight font-mono text-slate-900 dark:text-slate-100">
-          Inteligensi Terbaru
+          Rekomendasi Terbaru
         </h2>
         {briefs.length > 0 ? (
           <button

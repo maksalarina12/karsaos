@@ -8,7 +8,6 @@ import {
   CheckCheck,
   ChevronDown,
   ChevronUp,
-  FileText,
   Lightbulb,
   Search,
   Terminal,
@@ -50,8 +49,8 @@ const TYPE_META: Record<
   }
 > = {
   opportunity: {
-    label: 'Peluang Growth',
-    code: 'INTEL-OPP',
+    label: 'Peluang Pertumbuhan',
+    code: 'OPTI-GROWTH',
     icon: <TrendingUp className="size-4 text-emerald-600 dark:text-emerald-400" />,
     badgeBg: 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200/60 dark:border-emerald-800/60',
     badgeText: 'text-emerald-700 dark:text-emerald-400',
@@ -61,7 +60,7 @@ const TYPE_META: Record<
   },
   risk: {
     label: 'Risiko Operasional',
-    code: 'INTEL-RISK',
+    code: 'RISK-MITIGATION',
     icon: <TriangleAlert className="size-4 text-rose-600 dark:text-rose-400" />,
     badgeBg: 'bg-rose-50 dark:bg-rose-950/50 border-rose-200/60 dark:border-rose-800/60',
     badgeText: 'text-rose-700 dark:text-rose-400',
@@ -71,7 +70,7 @@ const TYPE_META: Record<
   },
   insight: {
     label: 'Insight Strategis',
-    code: 'INTEL-INSIGHT',
+    code: 'INSIGHT-OPERATIONAL',
     icon: <Lightbulb className="size-4 text-amber-600 dark:text-amber-400" />,
     badgeBg: 'bg-amber-50 dark:bg-amber-950/50 border-amber-200/60 dark:border-amber-800/60',
     badgeText: 'text-amber-700 dark:text-amber-400',
@@ -107,7 +106,7 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
       celebrate()
       toast({
         variant: 'success',
-        title: 'Rekomendasi Dieksekusi!',
+        title: 'Rekomendasi diterapkan',
         description: brief.estimated_impact,
       })
     }, 400)
@@ -121,8 +120,8 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
       celebrate()
       toast({
         variant: 'success',
-        title: 'Risiko Teratasi!',
-        description: 'Status inteligensi telah diperbarui.',
+        title: 'Mitigasi risiko diperbarui',
+        description: 'Status rekomendasi telah disesuaikan.',
       })
     }, 400)
   }
@@ -138,9 +137,9 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
             height={40}
             className="object-contain opacity-70 mb-1"
           />
-          <p className="text-slate-900 dark:text-slate-100 text-sm font-semibold">Belum Ada Executive Brief</p>
+          <p className="text-slate-900 dark:text-slate-100 text-sm font-semibold">Belum Ada Rekomendasi</p>
           <p className="max-w-sm text-xs text-slate-500 leading-relaxed font-mono">
-            Muat contoh data warung atau catat beberapa transaksi untuk mengaktifkan AI Intelligence Agent.
+            Silakan catat transaksi atau muat contoh data warung untuk melihat analisis rekomendasi.
           </p>
         </CardContent>
       </Card>
@@ -182,7 +181,7 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
                         Selesai
                       </Badge>
                     ) : (
-                      <span className="text-[10px] font-mono text-slate-400">STATUS: ACTIVE</span>
+                      <span className="text-[10px] font-mono text-slate-400">AKTIF</span>
                     )}
                   </div>
                   <h3 className="mt-2.5 text-sm font-bold text-slate-900 dark:text-slate-100 leading-snug">
@@ -209,13 +208,13 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
                         <div className="mt-1 flex flex-col gap-2 rounded-lg border border-slate-200/80 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-950/80 p-3 text-xs">
                           <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                             <Terminal className="size-3 text-indigo-500" />
-                            <span>Analysis & Root Cause:</span>
+                            <span>Analisis & Akar Masalah:</span>
                           </div>
                           <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-[11px]">
                             {brief.reasoning}
                           </p>
                           <div className="mt-1 pt-2 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between font-mono text-[11px]">
-                            <span className="text-slate-400">Est. Impact:</span>
+                            <span className="text-slate-400">Proyeksi Dampak:</span>
                             <span className={`font-bold tabular-nums ${meta.impactText}`}>{brief.estimated_impact}</span>
                           </div>
                         </div>
@@ -234,7 +233,7 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
                         aria-expanded={isExpanded}
                       >
                         <Search className="size-3 text-indigo-500" />
-                        <span>[Kenapa?]</span>
+                        <span>[Analisis Detail]</span>
                         {isExpanded ? (
                           <ChevronUp className="size-3 text-slate-400 ml-auto" />
                         ) : (
@@ -249,7 +248,7 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
                         onClick={() => setOpenBrief(brief)}
                         className="cursor-pointer font-mono text-[11px] text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                       >
-                        Detail
+                        Rincian
                       </Button>
                     </div>
 
@@ -271,7 +270,7 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
                               ) : (
                                 <>
                                   <Terminal className="size-3.5" />
-                                  <span>Execute: Mitigasi Risiko</span>
+                                  <span>Mitigasi Risiko</span>
                                 </>
                               )}
                             </Button>
@@ -292,7 +291,7 @@ export function BriefSection({ briefs, onSetStatus, stack }: BriefSectionProps) 
                               ) : (
                                 <>
                                   <Zap className="size-3.5 text-indigo-200 fill-indigo-200" />
-                                  <span>Execute: Terapkan Saran</span>
+                                  <span>Terapkan Saran</span>
                                 </>
                               )}
                             </Button>

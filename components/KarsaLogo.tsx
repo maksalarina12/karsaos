@@ -36,8 +36,8 @@ export function KarsaLogo({
           <span className="text-base font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
             Karsa<span className="text-indigo-600 dark:text-indigo-400">OS</span>
           </span>
-          <span className="rounded-full bg-indigo-50 dark:bg-indigo-950/80 px-2 py-0.5 text-[10px] font-mono font-semibold text-indigo-600 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/60">
-            v2.0 AI Executive
+          <span className="rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-mono font-medium text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+            Strategi & Keuangan
           </span>
         </div>
       )}

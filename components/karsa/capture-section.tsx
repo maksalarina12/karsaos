@@ -234,7 +234,7 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
     onCommit(preview)
     toast({
       variant: 'success',
-      title: 'Tersimpan ke Jurnal!',
+      title: 'Transaksi berhasil dicatat',
       description: `${preview.length} transaksi berhasil dicatat.`,
     })
     setPreview(null)
@@ -272,10 +272,10 @@ export function CaptureSection({ onCommit }: CaptureSectionProps) {
             height={20}
             className="object-contain"
           />
-          <span>AI Voice & Text Capture</span>
+          <span>Pencatatan Transaksi</span>
         </CardTitle>
         <p className="text-xs text-slate-500">
-          Ceritakan aktivitas warung lewat suara atau ketik bebas. AI KarsaOS akan mengekstrak jurnal transaksi otomatis.
+          Input transaksi melalui rekaman suara atau pengetikan teks untuk dicatat otomatis ke jurnal.
         </p>
       </CardHeader>
 

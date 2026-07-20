@@ -19,30 +19,29 @@ function aggregateByCategory(transactions: Transaction[]): CategoryAgg[] {
 }
 
 /**
- * Grounded, deterministic answer engine. It reads the loaded state and
- * responds in warm, plain Indonesian. No numbers are invented — every
- * figure comes from computeTotals / real transactions.
+ * Deterministic financial analysis engine. Responds in clear, professional Indonesian.
+ * All numbers are computed directly from actual transaction records.
  */
 export function answerQuestion(question: string, state: KarsaState): string {
   const q = question.toLowerCase()
   const { transactions } = state
 
   if (transactions.length === 0) {
-    return 'Aku belum punya data warungmu nih. Coba klik "Muat Contoh Data Warung" atau catat beberapa transaksi dulu, nanti aku bantu analisa ya!'
+    return 'Belum ada data transaksi tersimpan. Silakan muat contoh data warung atau catat beberapa transaksi untuk melihat analisis keuangan.'
   }
 
   const totals = computeTotals(transactions)
   const cats = aggregateByCategory(transactions)
 
   // Profit trend question.
-  if (q.includes('turun') || (q.includes('profit') && q.includes('minggu'))) {
+  if (q.includes('turun') || (q.includes('profit') && q.includes('minggu')) || q.includes('margin')) {
     const topExpense = [...cats].sort((a, b) => b.expense - a.expense)[0]
     return [
-      `Untung bersihmu sekarang ${formatRupiah(totals.laba)} dari omzet ${formatRupiah(totals.omset)}.`,
+      `Laba bersih saat ini tercatat ${formatRupiah(totals.laba)} dari total omzet ${formatRupiah(totals.omset)}.`,
       topExpense
-        ? `Pengeluaran terbesar ada di kategori "${topExpense.category}" sebesar ${formatRupiah(topExpense.expense)}.`
+        ? `Pengeluaran terbesar berada pada kategori "${topExpense.category}" sebesar ${formatRupiah(topExpense.expense)}.`
         : '',
-      'Kalau untung terasa menipis, biasanya karena harga bahan baku naik. Coba cek harga jual apakah masih sepadan dengan modal.',
+      'Penurunan margin umumnya dipengaruhi oleh peningkatan biaya operasional atau harga bahan baku. Disarankan mengevaluasi penyesuaian harga jual.',
     ]
       .filter(Boolean)
       .join(' ')
@@ -53,26 +52,26 @@ export function answerQuestion(question: string, state: KarsaState): string {
     const best = [...cats].sort(
       (a, b) => b.revenue - b.expense - (a.revenue - a.expense),
     )[0]
-    if (!best) return 'Belum cukup data untuk menentukan produk paling untung.'
+    if (!best) return 'Data transaksi belum cukup untuk menganalisis kontribusi produk.'
     const laba = best.revenue - best.expense
-    return `Kategori paling cuan sejauh ini adalah "${best.category}" dengan kontribusi untung sekitar ${formatRupiah(laba)} (omzet ${formatRupiah(best.revenue)}). Fokuskan energi dan stok ke sini ya!`
+    return `Kategori dengan kontribusi laba terbesar adalah "${best.category}" dengan estimasi laba ${formatRupiah(laba)} dari omzet ${formatRupiah(best.revenue)}.`
   }
 
   // Safe to buy stock question.
   if (q.includes('aman') || q.includes('stok') || q.includes('beli')) {
     if (totals.laba > 0) {
       const budget = Math.round(totals.laba * 0.4)
-      return `Kondisi kasmu sedang untung ${formatRupiah(totals.laba)}. Aman kok beli stok, tapi jaga jangan lebih dari ${formatRupiah(budget)} (sekitar 40% untung) biar arus kas tetap sehat.`
+      return `Laba operasional saat ini sebesar ${formatRupiah(totals.laba)}. Pembelian stok disarankan maksimal ${formatRupiah(budget)} (40% dari laba) agar arus kas tetap terjaga.`
     }
-    return `Hati-hati dulu ya, saat ini pengeluaran (${formatRupiah(totals.pengeluaran)}) lebih besar dari pemasukan (${formatRupiah(totals.omset)}). Sebaiknya tunda beli stok besar sampai penjualan naik lagi.`
+    return `Arus kas perlu diperhatikan karena total pengeluaran (${formatRupiah(totals.pengeluaran)}) melebihi omzet (${formatRupiah(totals.omset)}). Disarankan menunda alokasi stok besar.`
   }
 
   // Generic fallback grounded in data.
-  return `Dari catatanmu: omzet ${formatRupiah(totals.omset)}, pengeluaran ${formatRupiah(totals.pengeluaran)}, dan untung bersih ${formatRupiah(totals.laba)}. Coba tanya soal profit, produk paling untung, atau apakah aman beli stok — aku bantu analisa dari datamu.`
+  return `Ringkasan posisi keuangan: Omzet ${formatRupiah(totals.omset)}, pengeluaran ${formatRupiah(totals.pengeluaran)}, dan laba bersih ${formatRupiah(totals.laba)}. Silakan tanyakan seputar margin, kategori paling menguntungkan, atau alokasi stok.`
 }
 
 export const SUGGESTIONS = [
-  'Kenapa profit saya turun minggu ini?',
-  'Produk apa yang paling untung?',
-  'Apakah aman beli stok bahan hari ini?',
+  'Kenapa margin usaha turun minggu ini?',
+  'Kategori produk mana yang paling menguntungkan?',
+  'Apakah aman menambah stok bahan hari ini?',
 ]

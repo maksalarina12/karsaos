@@ -5,7 +5,6 @@ import { animate, motion, useReducedMotion, type Variants } from 'framer-motion'
 import {
   Activity,
   ArrowUpRight,
-  Receipt,
   Scale,
   TrendingDown,
   TrendingUp,
@@ -29,29 +28,25 @@ const HEALTH_STYLE_MAP: Record<
     badgeBorder: string
     badgeText: string
     dotBg: string
-    glowBg: string
   }
 > = {
   Sehat: {
-    badgeBg: 'bg-emerald-500/10 dark:bg-emerald-500/15',
-    badgeBorder: 'border-emerald-500/30',
-    badgeText: 'text-emerald-700 dark:text-emerald-400',
+    badgeBg: 'bg-emerald-500/10',
+    badgeBorder: 'border-emerald-500/20',
+    badgeText: 'text-emerald-600 dark:text-emerald-400',
     dotBg: 'bg-emerald-500',
-    glowBg: 'bg-emerald-500/40',
   },
   Waspada: {
-    badgeBg: 'bg-amber-500/10 dark:bg-amber-500/15',
-    badgeBorder: 'border-amber-500/30',
-    badgeText: 'text-amber-700 dark:text-amber-400',
+    badgeBg: 'bg-amber-500/10',
+    badgeBorder: 'border-amber-500/20',
+    badgeText: 'text-amber-600 dark:text-amber-400',
     dotBg: 'bg-amber-500',
-    glowBg: 'bg-amber-500/40',
   },
   'Perlu Perhatian': {
-    badgeBg: 'bg-rose-500/10 dark:bg-rose-500/15',
-    badgeBorder: 'border-rose-500/30',
-    badgeText: 'text-rose-700 dark:text-rose-400',
+    badgeBg: 'bg-rose-500/10',
+    badgeBorder: 'border-rose-500/20',
+    badgeText: 'text-rose-600 dark:text-rose-400',
     dotBg: 'bg-rose-500',
-    glowBg: 'bg-rose-500/40',
   },
 }
 
@@ -85,7 +80,7 @@ export function HeroStatus({ health, totals, transactionCount }: HeroStatusProps
   const meta = HEALTH_META[health]
   const style = HEALTH_STYLE_MAP[health]
   const prefersReducedMotion = useReducedMotion()
-  const labaLabel = totals.laba >= 0 ? 'Untung' : 'Boncos'
+  const labaLabel = totals.laba >= 0 ? 'Laba Bersih' : 'Defisit'
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 15 },
@@ -124,32 +119,19 @@ export function HeroStatus({ health, totals, transactionCount }: HeroStatusProps
         <div className="max-w-xl flex-1 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-mono font-bold tracking-widest text-indigo-600 dark:text-indigo-400 uppercase">
-              Executive Briefing
+              Laporan Posisi Usaha
             </span>
             <span className="inline-block size-1 rounded-full bg-slate-300 dark:bg-slate-700" />
             <div
-              className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${style.badgeBg} ${style.badgeBorder} ${style.badgeText} transition-all duration-200 hover:scale-[1.02]`}
+              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium ${style.badgeBg} ${style.badgeBorder} ${style.badgeText} transition-all duration-200`}
             >
-              <span className="relative flex size-2 items-center justify-center">
-                {!prefersReducedMotion && (
-                  <motion.span
-                    className={`absolute inset-0 rounded-full ${style.glowBg}`}
-                    animate={{ scale: [1, 2.2, 1], opacity: [0.75, 0, 0.75] }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-                )}
-                <span className={`size-1.5 rounded-full ${style.dotBg}`} />
-              </span>
-              <span>{meta.label}</span>
+              <span className={`w-1.5 h-1.5 rounded-full ${style.dotBg} animate-pulse`} />
+              <span>Status: {meta.label}</span>
             </div>
           </div>
 
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 sm:text-3xl text-balance">
-            {meta.emoji} {meta.label}
+            Kondisi Keuangan Usaha: {meta.label}
           </h1>
           <p className="text-sm font-normal leading-relaxed text-slate-600 dark:text-slate-400 text-pretty">
             {meta.helper}
@@ -165,7 +147,7 @@ export function HeroStatus({ health, totals, transactionCount }: HeroStatusProps
           >
             <div className="flex items-center justify-between gap-2">
               <span className="text-[11px] font-mono font-semibold tracking-wider text-slate-500 uppercase">
-                Omset
+                Omzet
               </span>
               <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                 <TrendingUp className="size-4" />
@@ -255,8 +237,8 @@ export function HeroStatus({ health, totals, transactionCount }: HeroStatusProps
         <Activity className="size-3.5 text-indigo-500 shrink-0" />
         <p>
           {transactionCount > 0
-            ? `Berbasis ${transactionCount} titik data transaksi realtime.`
-            : 'Belum ada data transaksi tersimpan. Gunakan tombol “Muat Contoh Data Warung”.'}
+            ? `Dihitung dari riwayat ${transactionCount} transaksi terakhir.`
+            : 'Belum ada data transaksi tersimpan. Silakan muat contoh data warung untuk melihat simulasi.'}
         </p>
       </div>
     </motion.section>

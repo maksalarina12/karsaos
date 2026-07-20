@@ -22,7 +22,7 @@ export function AskKarsa({ state }: AskKarsaProps) {
       id: 'welcome',
       role: 'assistant',
       content:
-        'Halo! Saya Karsa, Executive AI Financial Copilot. Tanyakan analisis bisnis, proyeksi laba, atau status stok — jawaban disusun secara real-time berdasarkan data warungmu.',
+        'Halo, saya Karsa. Silakan tanyakan analisis profit, arus kas, atau stok barang untuk mendukung keputusan usaha hari ini.',
     },
   ])
   const [input, setInput] = React.useState('')
@@ -64,17 +64,17 @@ export function AskKarsa({ state }: AskKarsaProps) {
           <Image
             src="/karsaos.png"
             alt="Karsa AI"
-            width={28}
-            height={28}
-            className="rounded-full object-contain border border-zinc-200/20 shadow-xs"
+            width={24}
+            height={24}
+            className="rounded-full object-contain border border-zinc-200/20"
           />
-          <span>Ask Karsa — AI Copilot</span>
+          <span>Ask Karsa | Asisten Strategi & Finansial Usaha</span>
           <span className="ml-auto rounded-full bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-600 border border-emerald-200/60">
             ONLINE
           </span>
         </CardTitle>
         <p className="text-xs text-slate-500 font-mono">
-          Model: KarsaOS Grounded RAG Intelligence
+          Analisis Keuangan Terintegrasi
         </p>
       </CardHeader>
 
@@ -109,7 +109,7 @@ export function AskKarsa({ state }: AskKarsaProps) {
                   {m.role === 'assistant' && (
                     <div className="flex items-center gap-1.5 font-mono text-[10px] text-indigo-600 dark:text-indigo-400 font-semibold mb-1 border-b border-slate-200/40 dark:border-slate-800 pb-1">
                       <Terminal className="size-3" />
-                      <span>KARSA AI EXECUTIVE REPORT:</span>
+                      <span>ANALISIS KARSA:</span>
                     </div>
                   )}
                   {m.content}
@@ -136,7 +136,7 @@ export function AskKarsa({ state }: AskKarsaProps) {
                     height={20}
                     className="rounded-full object-contain border border-zinc-200/20 shrink-0"
                   />
-                  <span>Karsa AI sedang menganalisis titik data</span>
+                  <span>Karsa sedang menganalisis data keuangan</span>
                   <div className="flex items-center gap-1 ml-1">
                     {[0, 1, 2].map((dotIndex) => (
                       <motion.span

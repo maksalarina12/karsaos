@@ -10,9 +10,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'KarsaOS — Business Copilot untuk UMKM Indonesia',
+  title: 'KarsaOS | Asisten Keuangan & Strategi UMKM',
   description:
-    'KarsaOS membantu pemilik warung dan UMKM Indonesia mencatat transaksi lewat suara, memahami kondisi keuangan, dan mengambil keputusan bisnis yang lebih baik setiap hari.',
+    'KarsaOS membantu pemilik UMKM mencatat transaksi lewat suara, menganalisis kondisi keuangan, dan mengambil keputusan usaha secara terukur.',
   generator: 'v0.app',
   icons: {
     icon: '/karsaos.png',
